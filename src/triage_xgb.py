@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 # ML Packages
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
@@ -181,3 +182,11 @@ def predict_discharge(data:pd.DataFrame):
     disp = False # admitted
     print("admitted")
   return disp
+
+
+def plot_auc(log):
+  log["New AUC"].plot(kind="line", figsize=(10,5), marker="o", grid=True,
+                    title="AUC vs. Number of Features Removed")
+  plt.xlabel("Number of Features Removed")
+  plt.ylabel("AUC")
+  plt.show()
