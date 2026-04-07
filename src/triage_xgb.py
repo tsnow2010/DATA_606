@@ -66,7 +66,7 @@ def get_importances(model):
   print(feat_imp.shape)
   return feat_imp
 
-def rfe_xgboost_booster(X_train, X_val, X_test, y_train, y_val, y_test, importances, best_auc, elimination_log, max_loss, min_features=100):
+def rfe_xgboost_booster(X_train, X_val, X_test, y_train, y_val, y_test, importances, best_auc, elimination_log, max_loss,min_features=100):
   
   new_importances = importances.copy()
 
@@ -131,10 +131,15 @@ def rfe_xgboost_booster(X_train, X_val, X_test, y_train, y_val, y_test, importan
      (reverse_importances.shape[0] == min_features) or \
       (reverse_importances.shape[0] == 1):
 
-      print("Stopping...")
+      print("Stopping RFE cycle...")
       elimination_log.append((least_important, auc_new, difference_auc))
       continuing = False
-      return elimination_log
+      
+      print('Saving log...')
+      write_log(elimination_log)
+      
+      print('Saving model...')
+      model.save_model("model.json")
 
     else:
       elimination_log.append([least_important, auc_new, difference_auc])
