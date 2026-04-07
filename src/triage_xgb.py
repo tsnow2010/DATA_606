@@ -184,8 +184,11 @@ def predict_discharge(data:pd.DataFrame):
   return disp
 
 
-def plot_auc(log):
-  log["New AUC"].plot(kind="line", figsize=(10,5), marker="o", grid=True,
+def plot_auc(log_path):
+  df = pd.read_csv(log_path) # Convert to pd.DataFrame
+
+  # Plot line graph
+  df["New AUC"].plot(kind="line", figsize=(10,5), marker="o", grid=True,
                     title="AUC vs. Number of Features Removed")
   plt.xlabel("Number of Features Removed")
   plt.ylabel("AUC")
