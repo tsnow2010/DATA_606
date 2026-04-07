@@ -139,7 +139,7 @@ def rfe_xgboost_booster(X_train, X_val, X_test, y_train, y_val, y_test, importan
       write_log(elimination_log)
       
       print('Saving model...')
-      model.save_model("model.json")
+      model_new.save_model("model.json")
 
     else:
       elimination_log.append([least_important, auc_new, difference_auc])
