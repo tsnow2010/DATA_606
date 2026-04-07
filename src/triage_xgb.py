@@ -190,3 +190,8 @@ def plot_auc(log):
   plt.xlabel("Number of Features Removed")
   plt.ylabel("AUC")
   plt.show()
+
+def get_xgb_model(model_path):
+    model = xgb.Booster()
+    model.load_model(model_path)
+    return model
